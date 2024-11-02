@@ -1,0 +1,19 @@
+{
+  "template": "https://github.com/cdubos-fr/cookiecutter-python",
+  "commit": "ce4fc77e6623c87c3528698bc009d41fbd87dfc1",
+  "checkout": null,
+  "context": {
+    "cookiecutter": {
+      "python_version": "3.12",
+      "full_name": "Clément Dubos",
+      "email": "contact@cdubos.fr",
+      "project_name": "pdf-img-converter-gui",
+      "project_slug": "pdf_img_converter_gui",
+      "description": "A GUI fot the pdf-img-converter",
+      "version": "0.0.0",
+      "is_file_module": false,
+      "_template": "https://github.com/cdubos-fr/cookiecutter-python"
+    }
+  },
+  "directory": null
+}

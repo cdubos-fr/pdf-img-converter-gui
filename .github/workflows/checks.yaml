@@ -1,0 +1,30 @@
+name: CI -> Check tests and build
+on:
+  push:
+    branches:
+    - main
+    tags:
+    - "*.*.*"
+  pull_request:
+    branches:
+    - main
+
+jobs:
+  code-quality:
+    name: Check tests
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - uses: cachix/install-nix-action@v27
+
+    - name: Run test suite
+      run: nix develop .#ci --command tox
+
+  check-build:
+    name: Check build
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - uses: cachix/install-nix-action@v27
+    - name: Check build
+      run: nix build --dry-run
