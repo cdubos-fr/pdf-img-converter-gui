@@ -5,6 +5,9 @@
 
 A GUI fot the pdf-img-converter
 
+![Illustration](./docs/convert-pdf-to-imgs.png)
+![Illustration bis](./docs/convert-pdf-to-imgs-select-file.png)0
+
 # Installation
 
 ```bash

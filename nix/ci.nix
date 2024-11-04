@@ -26,4 +26,7 @@ in
     ;
   inherit (python.pkgs) tox;
   tox-pdm = tox-pdm;
+
+  inherit (python.pkgs) kivy;
+  inherit (pkgs) poppler_utils;
 }
