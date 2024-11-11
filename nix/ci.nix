@@ -27,6 +27,16 @@ in
   inherit (python.pkgs) tox;
   tox-pdm = tox-pdm;
 
-  inherit (python.pkgs) kivy;
-  inherit (pkgs) poppler_utils;
+  # PDF tool
+  inherit (pkgs)
+    poppler_utils
+    ;
+
+  # GUI dependencies
+  inherit (pkgs)
+    mtdev
+    mesa
+    libGL
+    ;
+  inherit (pkgs.stdenv.cc.cc) lib;
 }

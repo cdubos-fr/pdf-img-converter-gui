@@ -40,12 +40,20 @@
                 python = python;
                 pyproject = pyproject-nix;
               };
+              gui-lib-path = pkgs.lib.makeLibraryPath [
+                pkgs.stdenv.cc.cc.lib
+                pkgs.libGL
+                pkgs.mtdev
+                pkgs.mesa
+              ];
             in
             {
               default = pkgs.mkShell {
                 name = "pdf-img-converter-gui-dev-env";
+                buildInputs = (pkgs.lib.attrsets.mapAttrsToList getAttrsValue dev-packages);
                 packages = (pkgs.lib.attrsets.mapAttrsToList getAttrsValue dev-packages);
                 shellHook = ''
+                  export LD_LIBRARY_PATH=${gui-lib-path}:$LD_LIBRARY_PATH
                   just devenv
                   source .venv/bin/activate
                 '';
@@ -72,6 +80,9 @@
                 pkgs.mkShell {
                   name = "pdf-img-converter-gui-ci-env";
                   packages = (pkgs.lib.attrsets.mapAttrsToList getAttrsValue ci-packages) ++ [ tox-gh ];
+                  shellHook = ''
+                    export LD_LIBRARY_PATH=${gui-lib-path}:$LD_LIBRARY_PATH
+                  '';
                 };
             };
         };
