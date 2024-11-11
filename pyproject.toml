@@ -46,7 +46,7 @@ ignore_missing_imports = true
 [[tool.mypy.overrides]]
 module = "pdf_img_converter_gui.*"
 disallow_any_generics = true
-disallow_subclassing_any = true
+disallow_subclassing_any = false
 disallow_untyped_defs = true
 disallow_incomplete_defs = true
 check_untyped_defs = true

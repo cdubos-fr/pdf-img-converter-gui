@@ -32,13 +32,15 @@ class MyApp(MDApp):
             selector='multi',
             ext=['.png', '.jpg', '.jpeg', '.pdf'],
         )
-        self.selected_files = []
+        self.selected_files: list[str] = []
         self.theme_cls.theme_style = 'Dark'
         self.theme_cls.primary_palette = 'DeepPurple'
 
     def build(self) -> MyWidget:
         """Create the app layout."""
-        return MyWidget()
+        widget = MyWidget()
+        widget.ids.conversion_mode.current_active_segment = widget.ids.conversion_mode.children[0]
+        return widget
 
     def file_manager_open(self) -> None:
         """Open the file manager."""
