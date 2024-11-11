@@ -28,6 +28,7 @@ class TestApp(GraphicUnitTest):
 
         assert isinstance(app.build(), MyWidget)
 
+    @pytest.mark.skip(reason='Current CI does not support GUI testing')
     def test_selected_files_is_empty(self) -> None:
         app = MyApp()
 
