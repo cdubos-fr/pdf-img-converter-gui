@@ -33,15 +33,6 @@
           };
         in
         {
-          packages.default =
-            let
-              project = pyproject-nix.lib.project.loadPDMPyproject {
-                projectRoot = ./.;
-              };
-              attrs = project.renderers.buildPythonPackage { inherit python; };
-            in
-            python.pkgs.buildPythonPackage attrs;
-
           devShells =
             let
               dev-packages = import ./nix/dev.nix {
