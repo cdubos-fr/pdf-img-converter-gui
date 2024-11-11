@@ -1,3 +1,4 @@
+import pytest
 from kivy.lang import Builder
 from kivy.tests.common import GraphicUnitTest
 
@@ -10,6 +11,7 @@ class TestApp(GraphicUnitTest):
         Builder.load_file('pdf_img_converter_gui/myapp.kv')
         return super().setUp()
 
+    @pytest.mark.skip(reason='Current CI does not support GUI testing')
     def test_app_rendering(self) -> None:
         app = MyApp()
 
@@ -20,6 +22,7 @@ class TestApp(GraphicUnitTest):
             == widget.ids.conversion_mode.children[0]
         )
 
+    @pytest.mark.skip(reason='Current CI does not support GUI testing')
     def test_get_widget(self) -> None:
         app = MyApp()
 
