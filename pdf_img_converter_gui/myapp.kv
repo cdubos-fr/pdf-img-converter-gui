@@ -1,0 +1,57 @@
+<MyWidget>:
+    orientation: 'vertical'
+    padding: 10
+    spacing: 10
+
+    MDLabel:
+        text: 'Select Conversion Mode'
+        halign: 'center'
+
+    MDSegmentedControl:
+        id: conversion_mode
+        pos_hint: {'center_x': 0.5}
+        MDSegmentedControlItem:
+            text: 'PDF to Images'
+        MDSegmentedControlItem:
+            text: 'Images to PDF'
+
+    MDLabel:
+        text: 'Selected file paths will appear here'
+        halign: 'center'
+
+    RecycleView:
+        id: rv
+        viewclass: 'SelectableLabel'
+        RecycleBoxLayout:
+            default_size: None, dp(20)
+            default_size_hint: 1, None
+            size_hint_y: None
+            height: self.minimum_height
+            orientation: 'vertical'
+            adaptive_height: True
+
+    BoxLayout:
+        orientation: 'horizontal'
+        size_hint_y: None
+        height: dp(56)
+        spacing: 10
+        pos_hint: {'center_x': 0.5}
+        size_hint: None, None
+        width: dp(320)
+
+        MDRaisedButton:
+            text: 'Open File Manager'
+            on_release: app.file_manager_open()
+            size_hint_x: None
+            width: dp(150)
+
+        MDRaisedButton:
+            text: 'Convert'
+            on_release: app.convert_files()
+            size_hint_x: None
+            width: dp(150)
+
+<SelectableLabel@MDLabel>:
+    text: ''
+    halign: 'center'
+    on_touch_down: app.remove_file(self.text) if self.collide_point(*args[1].pos) else None

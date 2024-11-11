@@ -9,7 +9,14 @@ version = "0.0.0"
 authors = [{name = "Clément Dubos", email = "contact@cdubos.fr"}]
 readme = "README.md"
 requires-python = ">= 3.12"
-dependencies = []
+dependencies = [
+    "kivy>=2.3.0",
+    "kivymd>=1.2.0",
+    "pdf-converter @ git+https://github.com/cdubos-fr/pdf-img-converter",
+]
+
+[project.gui-scripts]
+pdf-img-converter-gui = "pdf_img_converter_gui.app:run"
 
 [tool.pdm.dev-dependencies]
 typing = ["mypy"]
@@ -39,7 +46,7 @@ ignore_missing_imports = true
 [[tool.mypy.overrides]]
 module = "pdf_img_converter_gui.*"
 disallow_any_generics = true
-disallow_subclassing_any = true
+disallow_subclassing_any = false
 disallow_untyped_defs = true
 disallow_incomplete_defs = true
 check_untyped_defs = true
@@ -96,6 +103,8 @@ lint.select = [
 ]
 lint.ignore = [
     "ANN101",
+    "ANN401",
+    "D107",
     "D203",
     "D212",
     "D213",

@@ -27,4 +27,4 @@ jobs:
     - uses: actions/checkout@v4
     - uses: cachix/install-nix-action@v27
     - name: Check build
-      run: nix build --dry-run
+      run: nix develop .#ci --command pdm build

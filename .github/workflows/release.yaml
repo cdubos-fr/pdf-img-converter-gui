@@ -27,13 +27,13 @@ jobs:
           changelog_increment_filename: body.md
       - name: Build
         run: |
-          nix build
-          zip -r result.zip result
+          nix develop .#ci --command pdm build
+          zip -r package.zip dist
       - name: Release
         uses: softprops/action-gh-release@v2
         with:
           body_path: "body.md"
           tag_name: ${{ env.REVISION }}
-          files: result.zip
+          files: package.zip
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

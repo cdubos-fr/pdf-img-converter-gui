@@ -26,4 +26,27 @@ in
     ;
   inherit (python.pkgs) tox;
   tox-pdm = tox-pdm;
+
+  # PDF tool
+  inherit (pkgs)
+    poppler_utils
+    ;
+
+  # GUI dependencies
+  inherit (pkgs)
+    SDL2
+    SDL2_image
+    SDL2_ttf
+    SDL2_mixer
+    mtdev
+    mesa
+    libGL
+    ;
+  inherit (pkgs.stdenv.cc.cc) lib;
+  inherit (pkgs.gst_all_1)
+    gstreamer
+    gst-plugins-base
+    gst-plugins-good
+    gst-plugins-bad
+    ;
 }
