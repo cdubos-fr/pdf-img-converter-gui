@@ -40,6 +40,7 @@ dev = [
     "mkdocs-material",
     "ruff",
     "commitizen",
+    "tox",
 ]
 
 [tool.flit.module]
