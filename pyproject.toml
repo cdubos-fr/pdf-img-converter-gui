@@ -30,6 +30,19 @@ docs = [
     "mkdocs-material",
 ]
 
+[dependency-groups]
+dev = [
+    "mypy",
+    "pytest",
+    "pytest-cov",
+    "pytest-lazy-fixture",
+    "mkdocs",
+    "mkdocs-material",
+    "ruff",
+    "commitizen",
+    "tox",
+]
+
 [tool.flit.module]
 name = "pdf_img_converter_gui"
 

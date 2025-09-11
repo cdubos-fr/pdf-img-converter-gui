@@ -1,6 +1,7 @@
 """GUI for converting PDFs to images and images to PDFs."""
 
 import os
+from typing import TYPE_CHECKING
 from typing import Any
 from typing import cast
 
@@ -9,10 +10,12 @@ from kivy.uix.boxlayout import BoxLayout
 from kivymd.app import MDApp
 from kivymd.toast import toast
 from kivymd.uix.filemanager import MDFileManager
-from kivymd.uix.segmentedcontrol import MDSegmentedControl
-from kivymd.uix.segmentedcontrol import MDSegmentedControlItem
 from pdf_converter import convert_imgs_to_pdf
 from pdf_converter import convert_pdf_to_img
+
+if TYPE_CHECKING:
+    from kivymd.uix.segmentedcontrol import MDSegmentedControl
+    from kivymd.uix.segmentedcontrol import MDSegmentedControlItem
 
 
 class MyWidget(BoxLayout):
@@ -70,7 +73,7 @@ class MyApp(MDApp):
     def convert_files(self) -> None:
         """Convert the selected files based on the selected conversion mode."""
         mode: MDSegmentedControlItem = cast(
-            MDSegmentedControl, self.root.ids.conversion_mode
+            'MDSegmentedControl', self.root.ids.conversion_mode
         ).current_active_segment
         if not self.selected_files:
             toast('No files selected')
