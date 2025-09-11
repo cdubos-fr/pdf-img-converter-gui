@@ -3,40 +3,117 @@
 [![security: bandit](https://img.shields.io/badge/security-bandit-yellow.svg)](https://github.com/PyCQA/bandit)
 [![Checked with mypy](https://www.mypy-lang.org/static/mypy_badge.svg)](https://mypy-lang.org/)
 
-A GUI fot the pdf-img-converter
+A GUI for the pdf-img-converter
 
 ![Illustration](./docs/convert-pdf-to-imgs.png)
-![Illustration bis](./docs/convert-pdf-to-imgs-select-file.png)0
+![Illustration bis](./docs/convert-pdf-to-imgs-select-file.png)
 
-# Installation
+## Prerequisites
 
+- Python 3.12+
+- [PDM](https://pdm-project.org/) for dependency management
+- [Just](https://github.com/casey/just) for task automation (optional but recommended)
+- [direnv](https://direnv.net/) for automatic environment activation (optional but recommended)
+
+## Installation
+
+### From PyPI (when published)
 ```bash
-pip install <path-to-this-project>
-```
-or
-```bash
-pip install git+<git-url>
+pip install pdf-img-converter-gui
 ```
 
-to install it in editable mode:
+### From Git repository
+```bash
+pip install git+https://github.com/cdubos-fr/pdf-img-converter-gui
+```
+
+### In editable mode for development
 ```bash
 pip install -e .
 ```
 
-to add developpement dependencies:
+## Development Setup
+
+### Automatic setup with direnv (recommended)
+
+If you have [direnv](https://direnv.net/) installed:
+
+1. Clone the repository
+2. `cd` into the project directory
+3. Run `direnv allow` when prompted
+4. The environment will be automatically set up and activated
+
+### Manual setup
+
+1. Install PDM if not already installed:
+   ```bash
+   pip install pdm
+   ```
+
+2. Create and activate the development environment:
+   ```bash
+   just devenv
+   # or manually:
+   pdm lock
+   tox devenv -e devenv .venv
+   source .venv/bin/activate
+   pre-commit install
+   ```
+
+## Available Commands
+
+With [Just](https://github.com/casey/just) installed:
+
 ```bash
-pip install -e ".[dev]"
+# Set up development environment
+just devenv
+
+# Run tests
+just test
+
+# Run type checking
+just typecheck
+
+# Format code
+just format
+
+# Lint code
+just lint
+
+# Serve documentation locally
+just serve-docs
+
+# Clean build artifacts
+just clean
 ```
 
-# Setup dev' environment
+Or use the underlying tools directly:
 
-Use [Nix](https://zero-to-nix.com/) with [direnv](https://github.com/nix-community/nix-direnv) to automatically build your development environment,
-or simply run `nix develop`.
+```bash
+# Run tests
+tox -e tests
+# or
+pdm run pytest
 
-# Use CI environment
+# Type checking
+tox -e typing
+# or
+pdm run mypy
 
-To use `CI` environment instead of development, you can execute `nix develop .#ci`
+# Build package
+pdm build
+```
 
-# Build
+## Running the Application
 
-Use [Nix](https://zero-to-nix.com/) command: `nix build`
+After installation:
+
+```bash
+pdf-img-converter-gui
+```
+
+Or in development mode:
+
+```bash
+pdm run python -m pdf_img_converter_gui.app
+```

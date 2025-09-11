@@ -13,11 +13,6 @@ repos:
       - id: mixed-line-ending
       - id: requirements-txt-fixer
 
-  - repo: https://github.com/NixOS/nixfmt
-    rev: master
-    hooks:
-      - id: nixfmt
-
   - repo: https://github.com/bwhmather/ssort
     rev: 0.13.0
     hooks:

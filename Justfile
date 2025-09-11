@@ -1,8 +1,29 @@
 set shell := ["zsh", "-uc"]
 
 devenv: lock
-    tox devenv -e devenv .venv
-    pre-commit install
+    @echo "Setting up development environment"
+    @tox devenv -e devenv .venv
+    @echo "Activating virtual environment"
+    @source .venv/bin/activate
+    @pre-commit install
+    @echo "✓ Development environment ready"
+
+# Run tests
+test:
+    @tox -e tests
+
+# Run type checking
+typecheck:
+    @tox -e typing
+
+# Format code
+format:
+    @pre-commit run ruff-format --all-files
+
+# Lint code
+lint:
+    @pre-commit run ruff-check --all-files
+
 
 serve-docs:
     mkdocs serve
@@ -23,9 +44,13 @@ clean:
     find . -type d -name result -exec rm -rf {} +
     find . -type d -name __pycache__ -exec rm -rf {} +
 
-pdm-lock-params := if path_exists("pdm.lock") == "true" { "sync" } else { "lock -G :all" }
 lock:
-    pdm {{ pdm-lock-params }}
+    @pdm lock -G :all
 
-check:
-    tox
+update:
+    @pdm update
+
+# Release a new version
+release version:
+    @cz bump
+    @just build
